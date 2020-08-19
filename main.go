@@ -20,7 +20,6 @@ import (
 	"bytes"
 	"flag"
 	"fmt"
-	"log"
 	"net/http"
 	"os"
 	"runtime"
@@ -28,14 +27,12 @@ import (
 
 var (
 	buf        bytes.Buffer
-	logger     = log.New(&buf, "logger ", log.Lshortfile)
 	myHostname = os.Getenv("HOSTNAME")
 	myOS       = runtime.GOOS
 )
 
 func init() {
 	flag.Parse()
-	logger.SetOutput(os.Stderr)
 }
 
 func rootHandler(w http.ResponseWriter, r *http.Request) {
@@ -64,9 +61,9 @@ func rootHandler(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 
-	logger.Printf("Starting App")
+	fmt.Println("Starting App")
 	http.HandleFunc("/", rootHandler)
 	listenPort := ":8080"
-	logger.Printf("Listening on port: %v", listenPort)
+	fmt.Printf("Listening on port: %v\n", listenPort)
 	http.ListenAndServe(listenPort, nil)
 }
