@@ -4,6 +4,7 @@
 *.dll
 *.so
 *.dylib
+helloapi
 
 # Test binary, built with `go test -c`
 *.test
