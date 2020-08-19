@@ -26,9 +26,9 @@ import (
 )
 
 var (
-	buf        bytes.Buffer
-	myHostname = os.Getenv("HOSTNAME")
-	myOS       = runtime.GOOS
+	buf           bytes.Buffer
+	myHostname, _ = os.Hostname()
+	myOS          = runtime.GOOS
 )
 
 func init() {
@@ -39,7 +39,7 @@ func rootHandler(w http.ResponseWriter, r *http.Request) {
 
 	w.Write([]byte(`<html>`)) // Begin html block
 	w.Write([]byte(`<head> 
-		<title>Simple K8s Test Pod</title>
+		<title>Simple Hello World API</title>
 		<style>
 		label{
 		display:inline-block;
@@ -53,7 +53,7 @@ func rootHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		</style>
 		</head><body>`)) // Head  Begin Body
-	w.Write([]byte(fmt.Sprintf("<h3>Hello from: %s</h3>", myOS)))
+	w.Write([]byte(fmt.Sprintf("<h3>Hello from: %s operating system</h3>", myOS)))
 	w.Write([]byte(fmt.Sprintf("<h3>My hostname: %s</h3>", myHostname)))
 	w.Write([]byte(`</body></html>`)) //END
 
